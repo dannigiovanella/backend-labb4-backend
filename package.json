@@ -1,7 +1,6 @@
 {
   "name": "labb4-front",
   "version": "1.0.0",
-  "type": "module",
   "description": "��#\u0000 \u0000b\u0000a\u0000c\u0000k\u0000e\u0000n\u0000d\u0000-\u0000l\u0000a\u0000b\u0000b\u00004\u0000-\u0000F\u0000R\u0000O\u0000N\u0000T\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
@@ -16,6 +15,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/dannigiovanella/backend-labb4-FRONT/issues"
   },
