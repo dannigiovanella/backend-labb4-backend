@@ -66,18 +66,54 @@ router.post("/register", async (req, res) => {
 // Logga in användare
 router.post("/login", async (req, res) => {
 
+    //Testlog TA BORT SEN
+    console.log("login funkar");
+
     try {
 
+        // Hämtar username och password från request body
         const { username, password } = req.body;
 
+        // Kollar att båda fält är ifyllda
+        //Om inte skicka felmeddelande. Statuskod 400
+        if (!username || !password) {
 
+            return res.status(400).json({
+                error: "Alla fält måste fyllas i"
+            });
+        }
+
+        // Hitta användaren i databasen på användarnamn
+        const user = await User.findOne({ username });
+
+        // Om ingen användare finns skicka felmeddelande. Statuskod 400
+        if (!user) {
+            return res.status(400).json({
+                error: "Fel användarnamn eller lösenord"
+            });
+        }
+
+        // JÄMFÖR LÖSEN HÄR SEN!!
+
+        //Vid hittad användere. Lyckad inloggning. Skickar meddelande och användarnamn. Statuskod 200
+        res.status(200).json({
+            message: "Användare hittad",
+            user: user.username
+        });
+
+
+        //Vid fel, felmeddelande och statuskod 500
     } catch (error) {
-        rest.status(500).json({ error: "Serverfel" })
+
+        res.status(500).json({
+            error: "Serverfel",
+        });
+
     }
 
-    //Testlog
-    console.log("login funkar");
 });
+
+
 
 
 

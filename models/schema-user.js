@@ -39,14 +39,14 @@ const userSchema = new mongoose.Schema({
 
 // Hashar lösenord
 //Körs innan ny användare lagras
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
     try {
         if (this.isNew || this.isModified("password")) {
             const hashedPassword = await bcrypt.hash(this.password, 10);
             this.password = hashedPassword;
         }
 
-        next();
+        
 
     } catch (error) {
         next(error);
@@ -92,7 +92,7 @@ userSchema.statics.login = async function (username, password) {
         }
         //Vid korrekt lösen
         return user;
-        
+
     } catch (error) {
         throw error;
     }

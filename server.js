@@ -9,7 +9,7 @@ const express = require("express");
 //Importerar CORS
 const cors = require("cors");
 //Importerar routes
-const authorisationRoutes = require("./routes/routes-auth");
+const authorisationRoutes = require("./routes/routes");
 
 // Importerar databasanslutningen till MongoDB
 require("./db");
@@ -30,7 +30,7 @@ app.use(express.json());
 
 // ROUTES
 
-app.use("/api", routes-auth);
+app.use("/api", authorisationRoutes);
 
 
 
