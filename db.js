@@ -9,8 +9,9 @@ const mongoose = require("mongoose");
 
 
 // Ansluting till MongoDB (Atlas)
+mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log("Connected to database");
 }).catch((error) => {
-    console.log("Error connecting;" + error);
+    console.log("Error connecting");
 })
