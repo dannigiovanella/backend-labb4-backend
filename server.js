@@ -8,6 +8,8 @@
 const express = require("express");
 //Importerar CORS
 const cors = require("cors");
+//Importerar routes
+const authorisationRoutes = require("./routes/routes-auth");
 
 // Importerar databasanslutningen till MongoDB
 require("./db");
@@ -28,10 +30,7 @@ app.use(express.json());
 
 // ROUTES
 
-//TEST ROUTE
-app.get("/", (req, res) => {
-    res.json({ message: "API fungerar" });
-});
+app.use("/api", routes-auth);
 
 
 
