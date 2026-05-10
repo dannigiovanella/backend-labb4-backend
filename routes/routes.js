@@ -8,6 +8,9 @@ const router = express.Router();
 //Importerar bcrypt
 const bcrypt = require("bcrypt");
 
+//Importerar JWT
+const jwt = require("jsonwebtoken");
+
 //Importerar schema
 const User = require("../models/schema-user");
 
@@ -107,12 +110,21 @@ router.post("/login", async (req, res) => {
 
         }
 
-        //Vid hittad användere. Lyckad inloggning. Skickar meddelande och användarnamn. Statuskod 200
-        res.status(200).json({
-            message: "Användare hittad",
-            user: user.username
-        });
+        // Payload, information som lagras i token. Sparar användarnamn
+        const payload = {
+            username: username
+        };
 
+        //Skapar token, med nyckel från .env och giltighetstid
+        const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: "2h" });
+
+
+        //Vid hittad användere. Lyckad inloggning med token. Skickar meddelande och användarnamn. Statuskod 200
+        res.status(200).json({
+
+            message: "Användare inloggad",
+            token: token
+        });
 
         //Vid fel, felmeddelande och statuskod 500
     } catch (error) {
