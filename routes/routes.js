@@ -5,6 +5,8 @@
 const express = require("express");
 const router = express.Router();
 
+//Importerar bcrypt
+const bcrypt = require("bcrypt");
 
 //Importerar schema
 const User = require("../models/schema-user");
@@ -93,7 +95,17 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // JÄMFÖR LÖSEN HÄR SEN!!
+        // Jämför lösenord med hashat lösenord i databas
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        // Om lösenordet är fel, returnerar felmeddelande. Statuskod 400
+        if (!passwordMatch) {
+
+            return res.status(400).json({
+                error: "Fel användarnamn eller lösenord"
+            });
+
+        }
 
         //Vid hittad användere. Lyckad inloggning. Skickar meddelande och användarnamn. Statuskod 200
         res.status(200).json({
