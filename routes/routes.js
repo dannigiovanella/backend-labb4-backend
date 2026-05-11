@@ -20,10 +20,6 @@ const User = require("../models/schema-user");
 // Registera ny användare
 router.post("/register", async (req, res) => {
 
-    //Test log - TA BORT SEN
-    console.log("Registerring funkar");
-
-
     try {
 
         // Hämtar username och password från request body
@@ -70,9 +66,6 @@ router.post("/register", async (req, res) => {
 
 // Logga in användare
 router.post("/login", async (req, res) => {
-
-    //Testlog TA BORT SEN
-    console.log("login funkar");
 
     try {
 
@@ -136,8 +129,6 @@ router.post("/login", async (req, res) => {
     }
 
 });
-
-
 
 
 
